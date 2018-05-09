@@ -48,43 +48,14 @@ public:
     
     void SetColors()
     {
+        std::string s [6] = {"UP", "DOWN", "FRONT", "BACK", "RIGHT", "LEFT"};
         char first, second, third, forth;
-        
-        std::cout << "input the UP side: ";
-        std::cin >> first >> second >> third >> forth;
-        side up;
-        up.SetColors(first, second, third, forth);
-        sides[0] = up;
-        
-        std::cout << "input the DOWN side: ";
-        std::cin >> first >> second >> third >> forth;
-        side down;
-        down.SetColors(first, second, third, forth);
-        sides[1] = down;
-        
-        std::cout << "input the FRONT side: ";
-        std::cin >> first >> second >> third >> forth;
-        side front;
-        front.SetColors(first, second, third, forth);
-        sides[2] = front;
-        
-        std::cout << "input the BACK side: ";
-        std::cin >> first >> second >> third >> forth;
-        side back;
-        back.SetColors(first, second, third, forth);
-        sides[3] = back;
-        
-        std::cout << "input the RIGHT side: ";
-        std::cin >> first >> second >> third >> forth;
-        side right;
-        right.SetColors(first, second, third, forth);
-        sides[4] = right;
-        
-        std::cout << "input the LEFT side: ";
-        std::cin >> first >> second >> third >> forth;
-        side left;
-        left.SetColors(first, second, third, forth);
-        sides[5] = left;
+        for (int i = 0; i < 6; i++)
+        {
+            std::cout << "input the " << s[i] << " side: ";
+            std::cin >> first >> second >> third >> forth;
+            sides[i].SetColors(first, second, third, forth);
+        }
     }
     
     void RotateUp()
