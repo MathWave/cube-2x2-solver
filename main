@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 
 
@@ -35,13 +34,13 @@ public:
 class cube
 {
     
-    std::vector<side> sides;
+    side sides[8];
     
 public:
     
     bool solved()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 6; i++)
             if (!sides[i].solved())
                 return 0;
         return 1;
@@ -55,37 +54,37 @@ public:
         std::cin >> first >> second >> third >> forth;
         side up;
         up.SetColors(first, second, third, forth);
-        sides.push_back(up);
+        sides[0] = up;
         
         std::cout << "input the DOWN side: ";
         std::cin >> first >> second >> third >> forth;
         side down;
         down.SetColors(first, second, third, forth);
-        sides.push_back(down);
+        sides[1] = down;
         
         std::cout << "input the FRONT side: ";
         std::cin >> first >> second >> third >> forth;
         side front;
         front.SetColors(first, second, third, forth);
-        sides.push_back(front);
+        sides[2] = front;
         
         std::cout << "input the BACK side: ";
         std::cin >> first >> second >> third >> forth;
         side back;
         back.SetColors(first, second, third, forth);
-        sides.push_back(back);
+        sides[3] = back;
         
         std::cout << "input the RIGHT side: ";
         std::cin >> first >> second >> third >> forth;
         side right;
         right.SetColors(first, second, third, forth);
-        sides.push_back(right);
+        sides[4] = right;
         
         std::cout << "input the LEFT side: ";
         std::cin >> first >> second >> third >> forth;
         side left;
         left.SetColors(first, second, third, forth);
-        sides.push_back(left);
+        sides[5] = left;
     }
     
     void RotateUp()
@@ -258,70 +257,64 @@ public:
     
 };
 
-struct position
-{
-    cube current;
-    std::string formula = "";
-};
-
 std::string FindTheWay(cube c)
 {
-    std::queue<position> q;
+    std::queue<std::pair<cube, std::string>> q;
     q.push({c, ""});
     while (1)
     {
-        if (q.front().current.solved())
-            return q.front().formula;
+        if (q.front().first.solved())
+            return q.front().second;
         
         cube tmp;
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateUp();
-        q.push({tmp, q.front().formula + "U "});
+        q.push({tmp, q.front().second + "U "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateDown();
-        q.push({tmp, q.front().formula + "D "});
+        q.push({tmp, q.front().second + "D "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateFront();
-        q.push({tmp, q.front().formula + "F "});
+        q.push({tmp, q.front().second + "F "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateBack();
-        q.push({tmp, q.front().formula + "B "});
+        q.push({tmp, q.front().second + "B "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateRight();
-        q.push({tmp, q.front().formula + "R "});
+        q.push({tmp, q.front().second + "R "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateLeft();
-        q.push({tmp, q.front().formula + "L "});
+        q.push({tmp, q.front().second + "L "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateUpDash();
-        q.push({tmp, q.front().formula + "U' "});
+        q.push({tmp, q.front().second + "U' "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateDownDash();
-        q.push({tmp, q.front().formula + "D' "});
+        q.push({tmp, q.front().second + "D' "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateFrontDash();
-        q.push({tmp, q.front().formula + "F' "});
+        q.push({tmp, q.front().second + "F' "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateBackDash();
-        q.push({tmp, q.front().formula + "B' "});
+        q.push({tmp, q.front().second + "B' "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateRightDash();
-        q.push({tmp, q.front().formula + "R' "});
+        q.push({tmp, q.front().second + "R' "});
         
-        tmp = q.front().current;
+        tmp = q.front().first;
         tmp.RotateLeftDash();
-        q.push({tmp, q.front().formula + "L' "});
+        q.push({tmp, q.front().second + "L' "});
         
         q.pop();
     }
