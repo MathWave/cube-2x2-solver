@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-
+#include <ctime>
 
 class side
 {
@@ -34,7 +34,7 @@ public:
 class cube
 {
     
-    side sides[8];
+    side sides[6];
     
 public:
     
@@ -324,5 +324,8 @@ int main()
 {
     cube c;
     c.SetColors();
+    long start = time(0);
     std::cout << FindTheWay(c) << std::endl;
+    long end = time(0);
+    std::cout << "Needed time: " << end - start  << " seconds" << std::endl;
 }
